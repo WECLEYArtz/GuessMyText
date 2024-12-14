@@ -1,6 +1,7 @@
 // List of basic Console Virtual Terminal Sequences
 // For more info: https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 #pragma once
+
 #ifndef ANSI_ESCAPES_H
 #define ANSI_ESCAPES_H
 // ----------------------------------------------------------------------------
