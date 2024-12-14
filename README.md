@@ -12,8 +12,9 @@ Note : duplicated guess will be counted a mistake.
 
 Enjoy!
 
-```changelog v 0.11:
-=
+```
+changelog v 0.11:
+
 - freeing leftover memory
 - fixed game continuing  after winning
 - clearer messages handling for readability
