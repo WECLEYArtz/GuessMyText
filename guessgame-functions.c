@@ -3,7 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "guessgame_functions.h"
+#include "guessgame-functions.h"
+#include "guessgame-messages.h"
 
 char *getuniq(char *word_result){
 	int word_result_size = strlen(word_result);
@@ -44,7 +45,7 @@ void start_guess(char *word_result, char *word_uniq, char *word_hidden,
 
 	printf("try:");
 
-	while((answer_input = fgetc(stdin)) != '\n'){
+	while((answer_input = fgetc(stdin)) != '\n' && *lives != 0 && *bingos != 0){
 		//  add returning terminal cursor to position!
 		int correct = 0; //exists or not
 		if( !(isdigit(answer_input) || isalpha(answer_input) ||answer_input ==' ') )
@@ -59,16 +60,14 @@ void start_guess(char *word_result, char *word_uniq, char *word_hidden,
 
 				word_uniq[i] = '\200';
 				exposeword(word_result, word_hidden, answer_input);
-				printf("\x1b[32m\"%c\" exists!\x1b[37m     \"%s\"\n",
-						answer_input, word_hidden);
+				printf(M_CRCT,answer_input, word_hidden);
 				break;
 			}
 		}
 		if( correct == 0)
 		{
 			(*lives)--;
-			printf("\x1b[33mNo '%c' [%d tries left].\x1b[37m\n",answer_input, *lives);
-			//\"%c\" exists!\x1b[37m
+			printf(M_WRNG ,answer_input, *lives);
 		}
 	}
 }
