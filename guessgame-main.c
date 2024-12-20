@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include "guessgame-functions.h"
 #include "guessgame-messages.h"
 
@@ -14,7 +15,7 @@ void start_guess(char *wrd_goal, char *wrd_uniq, char *wrd_hidden,
 
 	//as long as there are plays retries , get a pending character
 	while((answer_input = fgetc(stdin)) != '\n' && *lives != 0 && *bingos != 0){
-		int correct = 0; //exists or not
+		bool correct = false; //exists or not
 
 		//if the pending character didnt meet the requirments, redo the while
 		if( !(isdigit(answer_input) || isalpha(answer_input) ||answer_input ==' ') )
@@ -26,7 +27,7 @@ void start_guess(char *wrd_goal, char *wrd_uniq, char *wrd_hidden,
 		for(int i = 0; wrd_uniq[i]; i++){
 			if( wrd_uniq[i] == answer_input){
 
-				correct = 1;
+				correct = true;
 				(*bingos)--;
 
 				wrd_uniq[i] = '\200';
@@ -35,7 +36,7 @@ void start_guess(char *wrd_goal, char *wrd_uniq, char *wrd_hidden,
 				break;
 			}
 		}
-		if( correct == 0)
+		if( !correct )
 		{
 			(*lives)--;
 			printf(M_WRNG ,answer_input, *lives);

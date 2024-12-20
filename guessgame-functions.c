@@ -5,12 +5,13 @@
 
 //get unique characters in a string, returns a pointer
 char *getuniq(char *string){
-	int string_len = strlen(string);
+	size_t string_len = strlen(string);
 	char *uniq_chars_buffer;
+
 	while ( (uniq_chars_buffer = malloc(string_len *sizeof(char)))  == NULL );
 	//to stores the chars seeked from goal string
 
-	for(int p=0, u=0, n=0; p < string_len; p++) //loop over the goal string
+	for(unsigned int p=0, u=0, n=0; p < string_len; p++) //loop over the goal string
 	{
 		for(; uniq_chars_buffer[n] ; n++) //compare every character in string with
 										//ones in uniq_buffer, if exists, skip
@@ -19,7 +20,7 @@ char *getuniq(char *string){
 										//uniq_chars_buffer[n] to uniq_buffer.
 			if (string[p] == uniq_chars_buffer[n])
 				{n=0; break; }
-		if(n == (int)strlen(uniq_chars_buffer))
+		if(n == (size_t)strlen(uniq_chars_buffer))
 		{
 			uniq_chars_buffer[u++] = string[p];
 			n=0;
@@ -36,7 +37,7 @@ char *getuniq(char *string){
 
 void exposechar(char *wrd_exposed, char *wrd_hidden, char keychar)
 {
-	for(int i = 0; wrd_exposed[i]; i++)
+	for(unsigned int i = 0; wrd_exposed[i]; i++)
 		if( wrd_exposed[i] == keychar )
 			wrd_hidden[i] = wrd_exposed[i];
 }
