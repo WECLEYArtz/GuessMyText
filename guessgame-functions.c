@@ -68,9 +68,12 @@ char *getuniq(char *string){
 	return ptr;
 }
 
-void exposechar(char *wrd_exposed, char *wrd_hidden, char keychar)
+void mark_char(char *wrd_exposed, wrd_struct *wrd_targets, char keychar)
 {
 	for(unsigned int i = 0; wrd_exposed[i]; i++)
 		if( wrd_exposed[i] == keychar )
-			wrd_hidden[i] = wrd_exposed[i];
+		{
+			wrd_targets->hidden[i] = wrd_exposed[i];
+			wrd_targets->marked[i] *= -1;
+		}
 }

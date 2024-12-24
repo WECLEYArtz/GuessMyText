@@ -6,5 +6,5 @@
 	#define M_CRCT GRN "\x1b[32m\"%c\" exists!\x1b[37m     \"%s\"\n" RESET
 	#define M_WRNG YEL "No '%c' [%d tries left].\n" RESET
 	#define M_RUNWON BOLD BLK GRN_B " <<< GG >>> " RESET
-	#define M_RUNLOS BOLD BLK RED_B " <<< defeat hh >>> " RESET
+	#define M_RUNLOS BOLD BLK RED_B " <<< defeat hh >>> " YEL_B " %s \n" RESET
 #endif
