@@ -1,9 +1,42 @@
-
+#include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "guessgame-functions.h"
+#include "ANSI-escapes.h"
 
-//get unique characters in a string, returns a pointer
+void getstr_input(char *str){
+	char buffer[64];
+	bool valid;
+
+	do{
+		valid = true;
+		fgets(buffer, 64, stdin);
+		buffer[strcspn(buffer, "\n")] = 0;// no tailing "\n"
+
+
+		if (!buffer[0]){
+			printf("nothing inputed, try again:");
+			valid = false;
+			continue;
+		}
+
+		for(int i= 0; buffer[i] != 0; i++)
+		{
+			if (!(isdigit(buffer[i]) || isalpha(buffer[i]) ||buffer[i] == ' '))
+			{
+				printf(" %c is invalid\nEnter a valid string:",buffer[i]);
+				valid = false;
+				break;
+			}
+		}
+	}while(!valid);
+	printf(CLR_DISP RST_CUR);// clear screen
+	strcpy(str, buffer);
+	return;
+}
+
 char *getuniq(char *string){
 	size_t string_len = strlen(string);
 	char *uniq_chars_buffer;

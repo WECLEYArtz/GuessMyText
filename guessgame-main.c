@@ -47,12 +47,9 @@ void start_guess(char *wrd_goal, char *wrd_uniq, char *wrd_hidden,
 int main(){
 	char wrd_goal[64];//carries the full name
 
-
-	//ask for and get the goal text
+	//get the goal text
 	printf(CLR_DISP RST_CUR "enter a string: ");
-	fgets(wrd_goal, 64, stdin);
-	printf(CLR_DISP RST_CUR);
-	wrd_goal[strcspn(wrd_goal, "\n")] = 0;// no tailing "\n"
+	getstr_input(wrd_goal);
 
 	//prepare these strings
 	char *wrd_uniq = getuniq(wrd_goal);
@@ -74,7 +71,10 @@ int main(){
 	if (bingos == 0)
 		printf("%s\n",M_RUNWON);
 	else
+	{
+		// show_unfound();
 		printf("%s\n",M_RUNLOS);
+	}
 	free(wrd_uniq);
 	return 0;
 }
