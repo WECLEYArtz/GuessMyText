@@ -12,6 +12,11 @@
 
 	void mark_char(char *str_exposed, wrd_struct *str_target, char keychar);
 
-	void start_guess(char *wrd_goal, wrd_struct wrd_clone, int *lives, int *bingos);
+	void start_guess(char *wrd_goal, wrd_struct wrd_clone, int *tries, int *bingos);
+
+	void clear_buffer();
+
+	// checking methods
+	bool check_guess(char *str_exposed, wrd_struct *str_target, char keychar);
 
 #endif
