@@ -3,8 +3,15 @@ CFLAG:=			-Wall -Werror -Wextra
 build_dir:=		build/
 build_name:=	game
 
-all:	guessgame-functions.h guessgame-functions.c guessgame-main.c
+all:	dir guessgame-functions.h guessgame-functions.c guessgame-main.c
 	$(CC) -o $(build_dir)$(build_name) $(CFLAG) guessgame-functions.c guessgame-main.c 
 
-gdball:
-	$(CC) -o $(build_dir)$(build_name) $(CFLAG) guessgame-functions.c guessgame-main.c -g 
+dball: dir
+	$(CC) -o $(build_dir)$(build_name) $(CFLAG) guessgame-functions.c guessgame-main.c -g
+	gdb ./$(build_dir)$(build_name)
+
+tall: all dir
+	./$(build_dir)$(build_name)
+
+dir:
+	if [ ! -d ./build ];then mkdir build;fi

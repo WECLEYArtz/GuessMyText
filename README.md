@@ -23,7 +23,7 @@ changelog v 0.49:
 
 - showing the found and unfound characters at the end
 - more interactivity
-  `-> refusing some unfun characters
-  `-> empty input case
+ `-> refusing some unfun characters
+ `-> empty input case
 - i drink water with a spoon, hby?
 ```
