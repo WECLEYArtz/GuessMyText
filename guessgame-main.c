@@ -8,61 +8,60 @@
 #include "guessgame-functions.h"
 #include "guessgame-messages.h"
 
-void start_run();
+void RunStart();
 int main(){
 	//optons
-		printf(CLR_DISP RST_CUR);
+	printf(CLR_DISP RST_CUR);
 	while (true){
-		printf("[[[	GUESS MY TEXT ]]\n\n");
-		printf("(1) start:\n(2) mod:\n(3) quit:\n");
-
-		char opt = fgetc(stdin);
+		printf(M_RETRY);
+		char opt = getchar();
 		switch (opt) {
-			case '1':
-				getchar();
-				start_run();
+			case '\n':
+				printf(SHW_CUR);
+				RunStart();
 				break;
-			case '2':
+			case 'm':
 				printf(CLR_DISP RST_CUR"coming soon...\n");
 				break;
-			case '3':
+			case 'q':
 				exit(0);
 			default :
 				printf(CLR_DISP RST_CUR"invalid option\n");
 		}
-		clear_buffer();
+		// BufferClear();
 	}
 	return 0;
 }
 
-void start_run(){
+void RunStart(){
 	//======[	INITIALIZE	MAIN	STRING	]=======
-	char wrd_goal[64];//carries the full name
+	//goal_text gltxt
+	char goal_text[64];//carries the full text
 	int bingos;	//how many character to find
 	int tries;	//how many times submissions allowed
 
 	printf(CLR_DISP RST_CUR "Enter your text: ");
-	getstr_input(wrd_goal);// get the text under conditions
+	GetStrInput(goal_text);// get the text under conditions
 
-	wrd_struct wrd_clone;//to assist marks for the progress
-	wrd_clone.uniq	= getuniq(wrd_goal);
+	Work_Clones Goal_Work_Clone;//to assist marks for the progress
+	Goal_Work_Clone.uniq	= GetUniqChars(goal_text);
 	//	"aabcccdeee" >> "abcde"
-	wrd_clone.hidden= (char *)malloc((strlen(wrd_goal)*sizeof(char)));
+	Goal_Work_Clone.hidden= (char *)malloc((strlen(goal_text)*sizeof(char)));
 	// "----------"
-	wrd_clone.marked= (char *)malloc((strlen(wrd_goal)*sizeof(char)));
+	Goal_Work_Clone.marked= (char *)malloc((strlen(goal_text)*sizeof(char)));
 	//	"aabcccdeee" >> "...b...deee"
 
-	strcpy(wrd_clone.marked, wrd_goal);
+	strcpy(Goal_Work_Clone.marked, goal_text);
 
-	bingos = strlen(wrd_clone.uniq);// how many correct wrds to guess and win
+	bingos = strlen(Goal_Work_Clone.uniq);// how many correct wrds to guess and win
 	tries = 10;// tries
 
-	int i= (int)strlen(wrd_goal);// fill it to "-----", it just works
-	wrd_clone.hidden[i--] = 0;
+	int i= (int)strlen(goal_text);// fill it to "-----", it just works
+	Goal_Work_Clone.hidden[i--] = 0;
 	for(; i >= 0; i--) // fill it to "-----"
-		wrd_clone.hidden[i] = '-';
+		Goal_Work_Clone.hidden[i] = '-';
 
-	printf(M_GUESS, wrd_clone.hidden,(int)strlen(wrd_clone.hidden));
+	printf(M_GUESS, Goal_Work_Clone.hidden,(int)strlen(Goal_Work_Clone.hidden));
 
 	//======[	PROCESS		THE		RUN	]=======
 	while(tries != 0 && bingos != 0)//self explainatory ngl
@@ -81,10 +80,10 @@ void start_run(){
 				)
 				continue;
 
-			if( check_guess(wrd_goal, &wrd_clone, answer_input) )//returns boolean
+			if( VerifyGuess(goal_text, &Goal_Work_Clone, answer_input) )//returns boolean
 			{
 				(bingos)--;
-				printf(M_CRCT,answer_input, wrd_clone.hidden);
+				printf(M_CRCT,answer_input, Goal_Work_Clone.hidden);
 			}
 			else
 			{
@@ -96,34 +95,20 @@ void start_run(){
 
 
 	if (bingos == 0)
-		printf("%s\n",M_RUNWON);
+		printf(CLR_DISP RST_CUR "%s\n",M_RUNWON);
 	else 
 	{
-		printf("\n"M_RUNLOS, wrd_goal);
+		printf(CLR_DISP RST_CUR "\n"M_RUNLOS, goal_text);
 		printf("                   "YEL_B" ");
-		for(int i=0; wrd_clone.marked[i]!=0; i++)
-			if(wrd_clone.marked[i] > 0)
+		for(int i=0; Goal_Work_Clone.marked[i]!=0; i++)
+			if(Goal_Work_Clone.marked[i] > 0)
 				printf(RED_B BLK" ");
 			else
 				printf(GRN_B BLK" ");
-		printf(YEL_B" \n"RESET);
+		printf(YEL_B" \n\n"RESET);
 	}
-	free(wrd_clone.uniq);
-	free(wrd_clone.hidden);
-	free(wrd_clone.marked);
-	clear_buffer();
-
-	printf(M_RETRY);
-	char action = getchar();
-		switch (action) {
-			case '\n':
-				start_run();
-				break;
-			case 'q':
-				printf("Quit\n");
-				exit(0);
-			default :
-				printf(CLR_DISP RST_CUR);
-				return;
-		}
+	free(Goal_Work_Clone.uniq);
+	free(Goal_Work_Clone.hidden);
+	free(Goal_Work_Clone.marked);
+	BufferClear();
 }

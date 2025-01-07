@@ -4,19 +4,18 @@
 		char *uniq; 
 		char *hidden;
 		char *marked;
-	}wrd_struct;
+	}Work_Clones;
 
-	char *getuniq(char *string);
+	void RunStart(); //start proccesing the game
 
-	void getstr_input(char *str);
+	char *GetUniqChars(char *string);
 
-	void mark_char(char *str_exposed, wrd_struct *str_target, char keychar);
+	void GetStrInput(char *str);
 
-	void start_guess(char *wrd_goal, wrd_struct wrd_clone, int *tries, int *bingos);
-
-	void clear_buffer();
+	void BufferClear();
+	void BufferDump();//will be added for dubug
 
 	// checking methods
-	bool check_guess(char *str_exposed, wrd_struct *str_target, char keychar);
+	bool VerifyGuess(char *str_exposed, Work_Clones *str_target, char keychar);
 
 #endif

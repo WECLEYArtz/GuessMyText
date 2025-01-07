@@ -6,33 +6,33 @@
 #include "guessgame-functions.h"
 #include "ANSI-escapes.h"
 
-void clear_buffer(){
+void BufferClear(){
 	char trash;
 	while((trash = fgetc(stdin)) != '\n' && trash != EOF);
 }
 
-bool check_guess(char *wrd_exposed, wrd_struct *wrd_clone, char answer_input)
+bool VerifyGuess(char *wrd_exposed, Work_Clones *Goal_Work_Clone, char answer_input)
 {
-			//checks if the taken character exists in wrd_uniq
-			//if yes, update values and expose it in wrd_hidden
-			//if no, lose the try
-			for(int i = 0; wrd_clone->uniq[i]; i++){
-				if( wrd_clone->uniq[i] == answer_input){
+	//checks if the taken character exists in wrd_uniq
+	//if yes, update values and expose it in wrd_hidden
+	//if no, lose the try
+	for(int i = 0; Goal_Work_Clone->uniq[i]; i++){
+		if( Goal_Work_Clone->uniq[i] == answer_input){
 
-					wrd_clone->uniq[i] *= -1;//that one character it guessed
-					for(unsigned int i = 0; wrd_exposed[i]; i++)
-						if( wrd_exposed[i] == answer_input )
-						{
-							wrd_clone->hidden[i] = wrd_exposed[i];
-							wrd_clone->marked[i] *= -1;
-						}
-					return true;
+			Goal_Work_Clone->uniq[i] *= -1;//that one character it guessed
+			for(unsigned int i = 0; wrd_exposed[i]; i++)
+				if( wrd_exposed[i] == answer_input )
+				{
+					Goal_Work_Clone->hidden[i] = wrd_exposed[i];
+					Goal_Work_Clone->marked[i] *= -1;
 				}
-			}
-			return false;
+			return true;
+		}
+	}
+	return false;
 }
 
-void getstr_input(char *str){ //responsible of getting a valid text
+void GetStrInput(char *str){ //responsible of getting a valid text
 	char buffer[64];
 	bool valid;
 
@@ -63,7 +63,7 @@ void getstr_input(char *str){ //responsible of getting a valid text
 	return;
 }
 
-char *getuniq(char *string){ //collect the unique characters in a string
+char *GetUniqChars(char *string){ //collect the unique characters in a string
 	size_t string_len = strlen(string);
 	char *uniq_chars_buffer;
 
