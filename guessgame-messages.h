@@ -10,10 +10,11 @@
 	#define M_RUNWON BOLD BLK GRN_B " <<< GG >>> " RESET
 	#define M_RUNLOS BOLD BLK RED_B " <<< defeat hh >>> " YEL_B " %s \n" RESET
 
-	#define M_RETRY_OPT1 BLK WHT_B " " MAG_B" (enter)	new run\n" 
-	#define M_RETRY_OPT2 BLK WHT_B " " MAG_B" (q)		quit\n"
-	#define M_RETRY_OPT3 BLK WHT_B " " MAG_B" (else)	home menu\n"
-	#define M_RETRY		BLK WHT_B			" retry?      			\n"\
-			M_RETRY_OPT1 M_RETRY_OPT2 M_RETRY_OPT3\
-			RESET		BLK WHT_B			"             " RESET 
+	#define M_RETRY_OPT1 BLK " " MAG_B" new run   (enter) \n" RESET
+	#define M_RETRY_OPT2 BLK " " MAG_B" setting   (s)     \n" RESET
+	#define M_RETRY_OPT3 BLK " " MAG_B" quit      (q)     \n" RESET
+
+	#define M_RETRY BLK WHT_B "    Guess My Text    \n" RESET\
+			M_RETRY_OPT1 M_RETRY_OPT2 M_RETRY_OPT3
+
 #endif
