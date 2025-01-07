@@ -8,6 +8,33 @@
 #include "guessgame-functions.h"
 #include "guessgame-messages.h"
 
+void start_run();
+int main(){
+	//optons
+		printf(CLR_DISP RST_CUR);
+	while (true){
+		printf("[[[	GUESS MY TEXT ]]\n\n");
+		printf("(1) start:\n(2) mod:\n(3) quit:\n");
+
+		char opt = fgetc(stdin);
+		switch (opt) {
+			case '1':
+				getchar();
+				start_run();
+				break;
+			case '2':
+				printf(CLR_DISP RST_CUR"coming soon...\n");
+				break;
+			case '3':
+				exit(0);
+			default :
+				printf(CLR_DISP RST_CUR"invalid option\n");
+		}
+		clear_buffer();
+	}
+	return 0;
+}
+
 void start_run(){
 	//======[	INITIALIZE	MAIN	STRING	]=======
 	char wrd_goal[64];//carries the full name
@@ -99,30 +126,4 @@ void start_run(){
 				printf(CLR_DISP RST_CUR);
 				return;
 		}
-}
-
-int main(){
-	//optons
-		printf(CLR_DISP RST_CUR);
-	while (true){
-		printf("[[[	GUESS MY TEXT ]]\n\n");
-		printf("(1) start:\n(2) mod:\n(3) quit:\n");
-
-		char opt = fgetc(stdin);
-		switch (opt) {
-			case '1':
-				getchar();
-				start_run();
-				break;
-			case '2':
-				printf(CLR_DISP RST_CUR"coming soon...\n");
-				break;
-			case '3':
-				exit(0);
-			default :
-				printf(CLR_DISP RST_CUR"invalid option\n");
-		}
-		clear_buffer();
-	}
-	return 0;
 }

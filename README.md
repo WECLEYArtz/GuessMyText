@@ -26,4 +26,9 @@ changelog v 0.49:
  `-> refusing some unfun characters
  `-> empty input case
 - i drink water with a spoon, hby?
+
+changelog v 0.50:
+
+- yet more interactivity
+ `-> added prototype menu and retry
 ```

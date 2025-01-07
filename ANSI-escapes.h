@@ -13,6 +13,8 @@
 //  Control Sequence Introducer (CSI) sequences
 // ----------------------------------------------------------------------------
 #define RST_CUR     "\x1B[1;1H" // Reset cursor position to upper left
+#define HDE_CUR     "\x1B[?25l" // Hide cursor
+#define SHW_CUR     "\x1B[?25h" // Show cursor
 #define CLR_DISP_A  "\x1B[0J"   // Erase in Display (after cursor)
 #define CLR_DISP_B  "\x1B[1J"   // Erase in Display (before cursor)
 #define CLR_DISP    "\x1B[2J"   // Erase in Display (entire)

@@ -10,6 +10,7 @@ void clear_buffer(){
 	char trash;
 	while((trash = fgetc(stdin)) != '\n' && trash != EOF);
 }
+
 bool check_guess(char *wrd_exposed, wrd_struct *wrd_clone, char answer_input)
 {
 			//checks if the taken character exists in wrd_uniq
