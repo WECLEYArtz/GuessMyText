@@ -31,4 +31,10 @@ changelog v 0.50:
 
 - yet more interactivity
  `-> added prototype menu and retry
+
+changelog v 0.51:
+
+- finished with menu and retry UI
+- added prototype status (win lose) 
 ```
+
