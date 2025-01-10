@@ -1,6 +1,6 @@
 #include <ncurses.h>
-#include "guessgame-messages-tui.h"
-#include "guessgame-functions-tui.h"
+#include "guessgame-messages.h"
+#include "guessgame-functions.h"
 #include "string.h"
 
 WINDOW *WindowCreatTitle();

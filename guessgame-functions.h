@@ -6,7 +6,7 @@
 		char *marked;
 	}Work_Clones;
 
-	void RunStart(); //start proccesing the game
+	int RunStart(); //start proccesing the game
 
 	char *GetUniqChars(char *string);
 
